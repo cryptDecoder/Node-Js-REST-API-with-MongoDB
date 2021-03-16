@@ -1,0 +1,20 @@
+{
+  "name": "node-js-rest-api-with-mongodb",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cryptDecoder/Node-Js-REST-API-with-MongoDB.git"
+  },
+  "author": "Pruthvi",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/cryptDecoder/Node-Js-REST-API-with-MongoDB/issues"
+  },
+  "homepage": "https://github.com/cryptDecoder/Node-Js-REST-API-with-MongoDB#readme"
+}
