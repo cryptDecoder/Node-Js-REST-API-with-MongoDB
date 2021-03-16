@@ -4,10 +4,14 @@
 
 // Call the required packages
 
-var express = require("express"); // call express package
-var app = express(); // configure app with express
-var bodyParser = require("body-parser");
-
+const express = require("express"); // call express package
+const app = express(); // configure app with express
+const bodyParser = require("body-parser");
+const MongoClient = require("mongodb").MongoClient;
+const ObjectID = require("mongodb").ObjectID;
+const { Collection } = require("mongoose");
+const CONNECTION_URL = "mongodb://localhost:27017";
+const DATABASE_NAME = "accounting_department";
 // configure app to use Body Parser
 // this will let us get the data from a POST
 
@@ -35,5 +39,21 @@ router.get("/", function (req, res) {
 app.use("/api", router);
 
 // START THE SERVER
-app.listen(port);
+// connecting to MongoDB database
+app.listen(port, () => {
+  MongoClient.connect(
+    CONNECTION_URL,
+    {
+      useNewUrlParser: true,
+    },
+    (error, client) => {
+      if (error) {
+        throw error;
+      }
+      database = client.db(DATABASE_NAME);
+      collection = database.collection("Personal");
+      console.log("Connected to " + DATABASE_NAME + " !");
+    }
+  );
+});
 console.log("Something awesome magic happens on port " + port);
