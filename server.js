@@ -34,8 +34,30 @@ router.get("/", function (req, res) {
 
 // More routes will be added bellow here
 
-// REGISTER OUR ROUTES
+// Building our endpoints
 
+//  insert The records into personal  database
+router.post("/personal", function (req, res) {
+  collection.insert(req.body, (error, result) => {
+    if (error) {
+      return res.status(500).send(error);
+    }
+    res.send(result.result);
+  });
+});
+
+// Get the records form database
+
+router.get("/personal", function (req, res) {
+  collection.find({}).toArray((error, result) => {
+    if (error) {
+      return res.status(500), send(error);
+    }
+    res.send(result);
+  });
+});
+
+// REGISTER OUR ROUTES
 app.use("/api", router);
 
 // START THE SERVER
