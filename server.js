@@ -8,7 +8,7 @@ const express = require("express"); // call express package
 const app = express(); // configure app with express
 const bodyParser = require("body-parser");
 const MongoClient = require("mongodb").MongoClient;
-const ObjectID = require("mongodb").ObjectID;
+const ObjectId = require("mongodb").ObjectID;
 const { Collection } = require("mongoose");
 const CONNECTION_URL = "mongodb://localhost:27017";
 const DATABASE_NAME = "accounting_department";
@@ -57,6 +57,22 @@ router.get("/personal", function (req, res) {
   });
 });
 
+// Get the personal by id
+
+router.get("/personal/:id", (req, res) => {
+  const id = req.params.id;
+  collection
+    .findOne({
+      _id: id,
+    })
+    .then((userFound) => {
+      if (!userFound) {
+        return res.status(404).send("User not found by give " + id + " id");
+      }
+      return res.status(200).json(userFound);
+    })
+    .catch((err) => console.error(err));
+});
 // REGISTER OUR ROUTES
 app.use("/api", router);
 
